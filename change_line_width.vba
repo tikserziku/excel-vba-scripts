@@ -7,7 +7,7 @@ Sub ChangeLineWidth()
     Dim NewWidth As Double
     
     ' Set the worksheet where you want to perform the line width replacement using the sheet index
-    Set ws = ThisWorkbook.Worksheets(1) ' замените 1 индексом нужного листа
+    Set ws = ActiveSheet
     
     ' Set the range of cells where you want to perform the line width replacement
     Set rng = ws.Range("A1:BN72")
