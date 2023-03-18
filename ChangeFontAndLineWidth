@@ -1,0 +1,40 @@
+Sub ChangeFontAndLineWidth()
+    Dim ws As Worksheet
+    Dim rng As Range
+    Dim cell As Range
+    Dim border As Variant
+    Dim NewWidth As Double
+    Dim currentFont As String
+    Dim currentSize As Integer
+    
+    ' Set the worksheet where you want to perform the replacements using the sheet index
+    Set ws = ActiveSheet
+    
+    ' Set the range of cells where you want to perform the replacements
+    Set rng = ws.Range("A1:BM72")
+    
+    ' Set the new line width
+    NewWidth = 2 ' new line width (2 points)
+    
+    ' Loop through all the cells in the range and change the font and line width
+    For Each cell In rng
+        ' Change font to Tahoma and preserve size, but remove italic and bold
+        currentFont = cell.Font.Name
+        currentSize = cell.Font.Size
+        cell.Font.Name = "Tahoma"
+        cell.Font.Size = currentSize
+        cell.Font.Italic = False
+        cell.Font.Bold = False
+        
+        ' Change line width to 2 points
+        For Each border In Array(xlEdgeLeft, xlEdgeTop, xlEdgeBottom, xlEdgeRight, xlInsideVertical, xlInsideHorizontal)
+            With cell.Borders(border)
+                ' If the border weight is greater than 1 point, change it to 2 points
+                If .LineStyle <> xlLineStyleNone And .Weight > xlHairline + 1 Then
+                    .Weight = xlMedium
+                End If
+            End With
+        Next border
+    Next cell
+End Sub
+
