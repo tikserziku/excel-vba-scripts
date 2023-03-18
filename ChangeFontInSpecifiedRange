@@ -1,0 +1,22 @@
+Sub ChangeFontInSpecifiedRange()
+    Dim cell As Range
+    Dim currentFont As String
+    Dim currentSize As Integer
+    Dim myRange As Range
+    
+    ' Set the range to A1:BM72
+    Set myRange = Range("A1:BM72")
+    
+    ' Loop through all cells in the range
+    For Each cell In myRange.Cells
+        ' Get current font and size
+        currentFont = cell.Font.Name
+        currentSize = cell.Font.Size
+        
+        ' Change font to Tahoma and preserve size, but remove italic and bold
+        cell.Font.Name = "Tahoma"
+        cell.Font.Size = currentSize
+        cell.Font.Italic = False
+        cell.Font.Bold = False
+    Next cell
+End Sub
